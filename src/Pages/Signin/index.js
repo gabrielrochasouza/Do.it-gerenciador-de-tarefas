@@ -9,7 +9,7 @@ import {
 import { FiMail } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,9 +18,15 @@ import api from "../../Services/index.js";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import HomeBtn from "../../Components/HomeBtn/index.js";
+import { useEffect } from "react";
 
-export default function Signin({ authenticated }) {
-  const history = useHistory();
+export default function Signin({ authenticated,setAuthenticated }) {
+
+  useEffect(()=>{
+    if (authenticated) {
+      return <Redirect to={"/dashboard"} />;
+    }
+  },[authenticated])
 
   const schema = yup.object().shape({
     name: yup.string().required("campo obrigatório"),
@@ -48,8 +54,9 @@ export default function Signin({ authenticated }) {
         console.log(res);
         const token = res.data.token;
         localStorage.setItem("@do.it:token", JSON.stringify(token));
+        setAuthenticated(true)
         toast.success("Cadastro realizado com sucesso!");
-        history.push("/dashboard");
+        
       })
       .catch((err) => {
         console.log(err);

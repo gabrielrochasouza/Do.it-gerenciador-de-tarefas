@@ -31,7 +31,7 @@ export default function Routes() {
       </Route>
 
       <Route exact path="/signin">
-        <Signin authenticated={authenticated} />
+        <Signin authenticated={authenticated} setAuthenticated={setAuthenticated} />
       </Route>
 
       <Route exact path="/dashboard">
