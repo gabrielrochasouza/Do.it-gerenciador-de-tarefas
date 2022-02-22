@@ -8,7 +8,7 @@ import {
 } from "./style.js";
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -20,7 +20,6 @@ import HomeBtn from "../../Components/HomeBtn/index.js";
 
 export default function Login({ authenticated, setAuthenticated }) {
 
-  const history = useHistory();
 
   const schema = yup.object().shape({
     email: yup.string().required("campo obrigatório").email("email inválido"),
