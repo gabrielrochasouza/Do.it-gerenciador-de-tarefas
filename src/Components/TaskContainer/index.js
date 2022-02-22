@@ -9,8 +9,10 @@ export default function TaskContainer({ children, today, id, ...rest }) {
     <TaskContainerDiv>
       <div>
         <div className="task">
-          <FiClipboard />
-          {children}
+          <div>
+            <FiClipboard />
+          </div>
+          <div>{children}</div>
         </div>
         <div className="linha"></div>
 
@@ -37,6 +39,7 @@ export default function TaskContainer({ children, today, id, ...rest }) {
       >
         Concluir
       </Button>
+      
     </TaskContainerDiv>
   );
 }

@@ -1,4 +1,4 @@
-import { DashboardContainer, SearchContainer, Tasks, LogOutDiv } from "./style";
+import { DashboardContainer, SearchContainer, Tasks, LogOutDiv, HelloUser } from "./style";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { FiEdit2, FiLogOut } from "react-icons/fi";
@@ -80,6 +80,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
 
   return (
     <DashboardContainer>
+       <HelloUser>Seja bem vindo {JSON.parse(localStorage.getItem("@NameUser"))}!!</HelloUser>
       <SearchContainer>
         <form onSubmit={handleSubmit(createTask)}>
           <Input
@@ -108,6 +109,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
       >
         <FiLogOut />
       </LogOutDiv>
+     
     </DashboardContainer>
   );
 }

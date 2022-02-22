@@ -13,7 +13,7 @@ export const HomeCircle = styled.div`
   align-items: center;
   transition: 0.5s;
   cursor: pointer;
-  border: 2px solid var(--orange);
+  border: 1px solid var(--orange);
   svg {
     color: white;
     width: 30px;

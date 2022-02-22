@@ -5,10 +5,10 @@ export const DashboardContainer = styled.main`
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 80px 0 30px;
+  padding: 20px 0 30px;
 
   @media (max-width: 600px) {
-    padding: 40px 0 30px;
+    padding: 10px 0 30px;
   }
 `;
 
@@ -61,6 +61,7 @@ export const Tasks = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 90px 10px 30px;
+
   button {
     width: 100%;
     font-size: 16px;
@@ -93,3 +94,15 @@ export const LogOutDiv = styled.div`
     transition: 0.5s;
   }
 `;
+export const HelloUser = styled.div`
+  max-width: 1000px;
+  margin: 0 0 40px;
+  padding: 0 0 0 20px;
+  font-size: 20px;
+  color: var(--orange);
+  cursor: pointer;
+  @media (max-width:700px){
+    font-size: 13px;
+  }
+
+`

@@ -54,6 +54,7 @@ export default function Signin({ authenticated,setAuthenticated }) {
         console.log(res);
         const token = res.data.token;
         localStorage.setItem("@do.it:token", JSON.stringify(token));
+        localStorage.setItem("@NameUser",JSON.stringify(res.data.user.name) )
         setAuthenticated(true)
         toast.success("Cadastro realizado com sucesso!");
         

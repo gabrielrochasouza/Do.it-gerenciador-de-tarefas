@@ -23,6 +23,10 @@ export const InputContainer = styled.div`
     margin: 2px 0 4px;
     display: flex;
     align-items: center;
+    :focus-within{
+      border: 1px solid var(--orange);
+
+    }
     svg{
         height: 30px;
         width: 30px;

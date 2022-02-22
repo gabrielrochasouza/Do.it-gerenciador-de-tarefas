@@ -47,6 +47,7 @@ export default function Login({ authenticated, setAuthenticated }) {
         toast.success("Login feito com sucesso!");
         setAuthenticated(true)
         localStorage.setItem("@do.it:token", JSON.stringify(res.data.token));
+        localStorage.setItem("@NameUser",JSON.stringify(res.data.user.name) )
         if(authenticated){
             return <Redirect to={"/dashboard"} />
         }
