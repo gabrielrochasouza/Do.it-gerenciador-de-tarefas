@@ -3,5 +3,5 @@ Link para Deploy:
 </h1>
 <h2>
 https://do-it-gabrielrochasouza.vercel.app
-https://do-it-gabrielrochasouza.vercel.app
+
 </h2>
