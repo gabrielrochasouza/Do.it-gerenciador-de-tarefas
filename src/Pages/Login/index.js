@@ -74,7 +74,7 @@ export default function Login({ authenticated, setAuthenticated }) {
             errors={errors.email?.message}
           />
           <Input
-          type="password"
+            isPassword
             label="Senha"
             placeholder="Senha"
             inputIcon={<FiLock />}

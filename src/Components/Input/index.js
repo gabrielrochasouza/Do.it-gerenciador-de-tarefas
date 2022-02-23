@@ -1,5 +1,7 @@
-import { InputContainer } from "./style";
-
+import { useState } from "react";
+import { InputContainer,IconBtn } from "./style";
+import {MdVisibility} from "react-icons/md"
+import {MdVisibilityOff} from "react-icons/md"
 
 
 export default function Input({
@@ -8,8 +10,11 @@ export default function Input({
   errors,
   register,
   name,
+  isPassword,
   ...rest
 }) {
+  const [visible,setVisible] = useState(false)
+
   return (
     <>
       <InputContainer errors={!!errors}>
@@ -19,10 +24,17 @@ export default function Input({
         <div>
           {inputIcon}
           {register ? (
-            <input {...rest} {...register(`${name}`)}  />
+            isPassword ? (<input type={visible ? "text" : "password"}  {...rest} {...register(`${name}`)}  />) : 
+            (<input {...rest} {...register(`${name}`)}  />)
+            
           ) : (
-            <input type={"password"} {...rest} />
+            <input {...rest} />
           )}
+          {isPassword && ( 
+            <IconBtn onClick={()=>setVisible(!visible)}>
+              {visible ? <MdVisibility/> : <MdVisibilityOff/>}
+            </IconBtn>
+           )  }
         </div>
       </InputContainer>
     </>

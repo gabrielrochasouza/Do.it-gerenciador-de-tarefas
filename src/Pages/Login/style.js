@@ -54,6 +54,9 @@ export const SideFormContainer = styled.div`
     font-size: 50px;
   }
   animation: appearLeft 0.5s ;
+  @media (max-width: 1000px) {
+    flex-basis: 100%;
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -67,7 +70,10 @@ export const LoginForm = styled.form`
       width: 100%;
   }
   @media (max-width:360px){
-    width: 100%;
+    width: 90%;
+    button {
+    width: 70%;
 
+  }
   }
 `;

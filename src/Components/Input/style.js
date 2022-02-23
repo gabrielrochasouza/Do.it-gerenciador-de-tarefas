@@ -6,32 +6,30 @@ export const InputContainer = styled.div`
   label {
     font-size: 20px;
     line-height: 20px;
-    font-family: 'PT Serif',serif;
-    span{
-        color: red;
-        font-size: 13px;
+    font-family: "PT Serif", serif;
+    span {
+      color: red;
+      font-size: 13px;
     }
-    
   }
   div {
     background-color: var(--white);
     border-radius: 10px;
-    border: 1px solid ${({errors})=> errors ? "red" : "#0C0D0D"};
+    border: 1px solid ${({ errors }) => (errors ? "red" : "#0C0D0D")};
     width: 100%;
     height: 50px;
-    padding: 0 20px 0 5px;
+    padding: 0 10px 0 5px;
     margin: 2px 0 4px;
     display: flex;
     align-items: center;
-    :focus-within{
+    :focus-within {
       border: 1px solid var(--orange);
-
     }
-    svg{
-        height: 30px;
-        width: 30px;
-        margin: 0 10px 0 10px;
-        color:${({errors})=> errors ? "red" : "#0C0D0D"};
+    svg {
+      height: 30px;
+      width: 30px;
+      margin: 0 10px 0 10px;
+      color: ${({ errors }) => (errors ? "red" : "#0C0D0D")};
     }
     input {
       border: 0;
@@ -41,17 +39,33 @@ export const InputContainer = styled.div`
       font-size: 16px;
       line-height: 33px;
     }
-    input:autofill{
-        background-color: var(--white);
+    input:autofill {
+      background-color: var(--white);
     }
     input:-webkit-autofill {
-        background-color: var(--white);
+      background-color: var(--white);
     }
 
     :hover {
       border: 1px solid var(--orange);
     }
   }
-
-
+`;
+export const IconBtn = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: 45px;
+  border-radius: 50%;
+  height: 45px !important;
+  transition: 0.5s;
+  :hover {
+    transition: 0.5s;
+    background-color: var(--white-cream);
+  }
+  svg {
+    color: var(--black);
+    box-sizing: initial;
+  }
 `;

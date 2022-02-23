@@ -97,7 +97,7 @@ export default function Signin({ authenticated,setAuthenticated }) {
           <Input
             label="Senha"
             placeholder="Senha*"
-            type="password"
+            isPassword
             inputIcon={<FiLock />}
             register={register}
             name={"password"}
@@ -106,7 +106,7 @@ export default function Signin({ authenticated,setAuthenticated }) {
           <Input
             label="Confirmar Senha"
             placeholder="Confirme sua Senha*"
-            type="password"
+            isPassword
             inputIcon={<FiLock />}
             register={register}
             name={"confirm_password"}
