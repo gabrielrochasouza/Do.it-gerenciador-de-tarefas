@@ -1,8 +1,6 @@
 import Button from "../Button";
 import { TaskContainerDiv } from "./style";
 import { FiClipboard, FiCalendar } from "react-icons/fi";
-import api from "../../Services";
-import { toast } from "react-toastify";
 
 export default function TaskContainer({
   children,
