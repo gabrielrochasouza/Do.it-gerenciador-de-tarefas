@@ -60,12 +60,23 @@ export const Tasks = styled.div`
   color: var() --black;
   display: flex;
   flex-wrap: wrap;
-  padding: 90px 10px 30px;
+  padding: 50px 10px 30px;
 
   button {
     width: 100%;
     font-size: 16px;
     height: 40px;
+  }
+  >svg{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
+    animation: rotate infinite 5s linear;
+    color: var(--orange);
+  }
+  >svg::before{
+  content: "Adicione uma tarefa";
   }
   @media (max-width: 600px){
       padding: 20px 0 20px;
@@ -89,6 +100,7 @@ export const LogOutDiv = styled.div`
   svg {
     color: var(--white);
   }
+
   :hover {
     background-color: var(--orange);
     transition: 0.5s;
@@ -105,4 +117,34 @@ export const HelloUser = styled.div`
     font-size: 13px;
   }
 
+`
+
+export const FilterTask = styled.div`
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  max-width: 250px;
+  color: var(--black);
+  margin: 30px auto 0px;
+  font-size: 14px;
+  animation: appearRight 0.5s;
+  p{
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 2px solid #d1d1d1;
+    background-color: #ddd;
+    border-radius: 5px;
+    transition: 0.5s;
+    :hover{
+      border: 2px solid var(--black);
+      transition: 0.5s;
+      background-color: #f8f8f8;
+
+    }
+  }
+  .selected{
+    background-color: #fff;
+    color: var(--orange);
+    font-weight: 700;
+  }
 `

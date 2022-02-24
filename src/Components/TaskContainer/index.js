@@ -4,7 +4,17 @@ import { FiClipboard, FiCalendar } from "react-icons/fi";
 import api from "../../Services";
 import { toast } from "react-toastify";
 
-export default function TaskContainer({ children, today, id, ...rest }) {
+export default function TaskContainer({
+  children,
+  today,
+  id,
+  allTasks,
+  setAllTasks,
+  getTasks,
+  completarTask,
+  completedOrIncompleted,
+  ...rest
+}) {
   return (
     <TaskContainerDiv>
       <div>
@@ -24,22 +34,10 @@ export default function TaskContainer({ children, today, id, ...rest }) {
       <Button
         isBlack={true}
         {...rest}
-        onClick={() => {
-          const token = JSON.parse(localStorage.getItem("@do.it:token"));
-          api
-            .delete(`/task/${id}`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-              },
-            })
-            .then((res) => toast.success("Tarefa finalizada!!"))
-            .catch((err) => console.log(err));
-        }}
+        onClick={() => {if(completedOrIncompleted===false) completarTask(id)}}
       >
-        Concluir
+        {completedOrIncompleted ? "Tarefa Concluída":"Concluir Tarefa"}
       </Button>
-      
     </TaskContainerDiv>
   );
 }

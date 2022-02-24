@@ -10,7 +10,6 @@ export default function Routes() {
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("@do.it:token"));
-
     if (token) {
       setAuthenticated(true);
     }

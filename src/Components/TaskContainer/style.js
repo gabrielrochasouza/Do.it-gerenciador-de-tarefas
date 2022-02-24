@@ -20,6 +20,9 @@ export const TaskContainerDiv = styled.div`
   @media (max-width: 600px) {
     margin: 0 0 20px;
   }
+  @media (max-width:420px){
+    width: 93%;
+  }
   div {
     .calendar,
     .task {
