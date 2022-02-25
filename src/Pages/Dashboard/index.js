@@ -11,7 +11,7 @@ import Input from "../../Components/Input";
 import { FiEdit2, FiLogOut } from "react-icons/fi";
 import { RiTodoFill } from "react-icons/ri";
 
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -30,7 +30,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
 
 
 
-  function getTasks(trueOrFalse) {
+  function getTasks(trueOrFalse,firstLoad=false) {
     const token = JSON.parse(localStorage.getItem("@do.it:token"));
     api
       .get("task", {
@@ -56,7 +56,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
           return { ...task, createdAt: dataFormatada };
         });
        trueOrFalse ? setCompletedTasks(datas) : setIncompletedTasks(datas)
-       setTasks(datas)
+       if(firstLoad===false) setTasks(datas)
       })
       .catch((err) => console.log(err));
   }
@@ -105,8 +105,9 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
     if (!authenticated) return <Redirect to="/login" />;
     if(completedTasks.length!==0 && incompletedTasks.length!==0){
       isCompleted ? setTasks(completedTasks) : setTasks(incompletedTasks)
-    }else{
-      getTasks(isCompleted)
+    }else{//primeira montagem
+      getTasks(true,true) //montando as tarefas completas
+      getTasks(isCompleted) //montando as tarefas incompletas
     }
   }, [isCompleted]);
 
@@ -145,7 +146,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
   return (
     <DashboardContainer>
       <HelloUser>
-        Seja bem vindo {JSON.parse(localStorage.getItem("@NameUser"))}!!
+        Seja bem vindo, {JSON.parse(localStorage.getItem("@NameUser"))}!!
       </HelloUser>
       <SearchContainer>
         <form onSubmit={handleSubmit(createTask)}>
