@@ -11,7 +11,7 @@ import Input from "../../Components/Input";
 import { FiEdit2, FiLogOut } from "react-icons/fi";
 import { RiTodoFill } from "react-icons/ri";
 
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -24,6 +24,11 @@ import { toast } from "react-toastify";
 export default function Dashboard({ authenticated, setAuthenticated }) {
   const [tasks,setTasks] = useState([])
   const [isCompleted,setIsCompleted] = useState(false)
+
+  const [completedTasks,setCompletedTasks] = useState([])
+  const [incompletedTasks,setIncompletedTasks] = useState([])
+
+
 
   function getTasks(trueOrFalse) {
     const token = JSON.parse(localStorage.getItem("@do.it:token"));
@@ -50,7 +55,8 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
           delete task.createdAt;
           return { ...task, createdAt: dataFormatada };
         });
-        setTasks(datas)
+       trueOrFalse ? setCompletedTasks(datas) : setIncompletedTasks(datas)
+       setTasks(datas)
       })
       .catch((err) => console.log(err));
   }
@@ -69,17 +75,39 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
         }
       )
       .then((res) => {
+        const taskSelected = incompletedTasks.find(task=>task._id===id)
+        setCompletedTasks([...completedTasks,taskSelected])
+        taskSelected.completed=true
         getTasks(isCompleted)
         toast.success("Tarefa finalizada!!");
       })
       .catch((err) => console.log(err));
   }
 
+  function excluirTask(id){
+    const token = JSON.parse(localStorage.getItem("@do.it:token"));
+    api.delete(`/task/${id}`,
+      {
+        headers:{
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => {
+      setCompletedTasks(completedTasks.filter(task=>task._id!==id))
+      //getTasks(true)
+      setTasks(completedTasks.filter(task=>task._id!==id))
+      toast.success("Tarefa excluída!!");
+    }).catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     if (!authenticated) return <Redirect to="/login" />;
-    getTasks(isCompleted);
-
+    if(completedTasks.length!==0 && incompletedTasks.length!==0){
+      isCompleted ? setTasks(completedTasks) : setTasks(incompletedTasks)
+    }else{
+      getTasks(isCompleted)
+    }
   }, [isCompleted]);
 
   const schema = yup.object().shape({
@@ -104,7 +132,8 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
         },
       })
       .then((res) => {
-        getTasks(isCompleted);
+        setIsCompleted(false)
+        getTasks(false);
         toast.success("Nova Tarefa Criada!");
       })
       .catch((err) => console.log(err));
@@ -112,7 +141,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
 
   if (!authenticated) return <Redirect to="/login" />
 
-  console.log("recriado")
+
   return (
     <DashboardContainer>
       <HelloUser>
@@ -137,11 +166,9 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
       <FilterTask>
         <p onClick={()=>{
           setIsCompleted(false)
-          console.log(isCompleted)
         }} className={!isCompleted ? "selected" : null}>Incompleto</p>
         <p onClick={()=>{
           setIsCompleted(true)
-          console.log(isCompleted)
         }} className={isCompleted ? "selected": null}>Completo </p> 
       </FilterTask>
 
@@ -153,6 +180,7 @@ export default function Dashboard({ authenticated, setAuthenticated }) {
             today={task.createdAt}
             completedOrIncompleted={task.completed}
             completarTask={completarTask}
+            excluirTask={excluirTask}
           >
             {task.description}
           </TaskContainer>

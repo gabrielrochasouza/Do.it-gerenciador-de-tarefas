@@ -11,6 +11,7 @@ export default function TaskContainer({
   getTasks,
   completarTask,
   completedOrIncompleted,
+  excluirTask,
   ...rest
 }) {
   return (
@@ -32,9 +33,9 @@ export default function TaskContainer({
       <Button
         isBlack={true}
         {...rest}
-        onClick={() => {if(completedOrIncompleted===false) completarTask(id)}}
+        onClick={() => {completedOrIncompleted===false ? completarTask(id) : excluirTask(id) }}
       >
-        {completedOrIncompleted ? "Tarefa Concluída":"Concluir Tarefa"}
+        {completedOrIncompleted ? "Excluir Tarefa Concluída":"Concluir Tarefa"}
       </Button>
     </TaskContainerDiv>
   );

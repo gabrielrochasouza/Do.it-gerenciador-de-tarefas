@@ -126,17 +126,17 @@ export const FilterTask = styled.div`
   max-width: 250px;
   color: var(--black);
   margin: 30px auto 0px;
-  font-size: 14px;
+  font-size: 15px;
   animation: appearRight 0.5s;
   p{
     cursor: pointer;
     padding: 10px 15px;
-    border: 2px solid #d1d1d1;
-    background-color: #ddd;
+    border: 2px solid var(--black);
+    background-color: #f4f4f4;
     border-radius: 5px;
     transition: 0.5s;
     :hover{
-      border: 2px solid var(--black);
+      border: 2px solid var(--orange);
       transition: 0.5s;
       background-color: #f8f8f8;
 
@@ -144,7 +144,8 @@ export const FilterTask = styled.div`
   }
   .selected{
     background-color: #fff;
+    border: 2px solid var(--orange);
     color: var(--orange);
-    font-weight: 700;
+
   }
 `
